@@ -34,4 +34,7 @@
 
   --disabled: #555f7d;
   --text-disabled: #aab3cc;
+
+}body {
+  background-color: var(--gray-900) !important;
 }

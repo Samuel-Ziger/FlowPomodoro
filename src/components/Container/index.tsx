@@ -1,4 +1,3 @@
-export { Container } from './Container';
 import styles from './styles.module.css'; 
 
 type ContainerProps = {
@@ -13,5 +12,4 @@ export function Container({ children }: ContainerProps){
             </div>
         </div>
     );
-
 };
