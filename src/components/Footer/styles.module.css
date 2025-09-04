@@ -1,6 +1,18 @@
-.heading {
+.footer {
 display: flex;
+flex-direction: column;
 align-items: center;
 justify-content: center;
-gap: 2.4rem;
+font-size: 1.2ram;
+gap: 1.6ram;
+
+}
+.footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--text-muted);
+    text-decoration: underline;
 }
