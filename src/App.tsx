@@ -16,10 +16,28 @@ import { PlayCircleIcon } from 'lucide-react';
 import { Footer } from './components/Footer';
 
 
+
 export function App() {
+// Que todos os componentes que usam "número"
+// Saibam das mudanças em seu valor
+// Sempre que eu usar useState não vou suar  atribuição diretamente
+/*
+import { Heading } from './components/Heading';
+import { useState } from 'react';
+const [numero, setNumero] = useState(() => {
+    console.log('Lazy initialization')
+    return 0;
+});
+const [numero, setNumero] = useState(0)
+ function handleClick(){
+//setNumero ( preveState => preveState + 1 );
+setNumero(1);
+<Heading>Numero:{numero}</Heading>
+<button onClick={handleClick}>Auemnta</button>
+}*/
     return(
         <>
-        
+
         <Container>
             <Logo />
         </Container>
@@ -32,11 +50,12 @@ export function App() {
             <CountDown />
         </Container>
 
-        <Container>
+        <Container >
             <form className= 'form' action=''>
                 <div className="formRow">
                     <DefaultInput
-                        labelText='Task'
+                        //labelText={numero.toString()}
+                        labelText='task'
                         id='meuInput' 
                         type='text' 
                         placeholder='Digite algo' 
