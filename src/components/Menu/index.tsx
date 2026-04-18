@@ -1,25 +1,31 @@
-import { useState, useEffect } from 'react';
-import styles from './styles.module.css';
-import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon, MoonIcon } from "lucide-react";
+import { useState, useEffect } from 'react'
+import styles from './styles.module.css'
+import {
+  HistoryIcon,
+  HouseIcon,
+  MoonIcon,
+  SettingsIcon,
+  SunIcon,
+} from 'lucide-react'
+import { useAppNavigation } from '../../context/AppNavigationContext'
 
-type AvailableThemes = 'dark' | 'light';
+type AvailableThemes = 'dark' | 'light'
 
 export function Menu() {
+  const { view, goHome, goHistory, goSettings } = useAppNavigation()
+
   const [theme, setTheme] = useState<AvailableThemes>(() => {
-    const storageTheme = 
-    (localStorage.getItem('theme') as AvailableThemes) || 'dark';
-    return storageTheme;
-  });
+    const storageTheme =
+      (localStorage.getItem('theme') as AvailableThemes) || 'dark'
+    return storageTheme
+  })
 
   const nextThemeIco = {
     dark: <SunIcon />,
     light: <MoonIcon />,
   }
 
-  function handleThemeChange(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) {
-    event.preventDefault()
+  function handleThemeChange() {
     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'))
   }
 
@@ -28,27 +34,50 @@ export function Menu() {
     localStorage.setItem('theme', theme)
   }, [theme])
 
+  const navBtn = (active: boolean) =>
+    `${styles.menuLink} ${active ? styles.menuLinkActive : ''}`.trim()
+
   return (
     <nav className={styles.menu}>
-      <a className={styles.menuLink} href="#" aria-label="Ir para Home" title="Ir para Home">
+      <button
+        type="button"
+        className={navBtn(view === 'home')}
+        aria-label="Ir para Home"
+        title="Ir para Home"
+        aria-current={view === 'home' ? 'page' : undefined}
+        onClick={goHome}
+      >
         <HouseIcon />
-      </a>
-      <a className={styles.menuLink} href="#" aria-label="Ver histórico" title="Ver histórico">
+      </button>
+      <button
+        type="button"
+        className={navBtn(view === 'history')}
+        aria-label="Ver histórico"
+        title="Ver histórico"
+        aria-current={view === 'history' ? 'page' : undefined}
+        onClick={goHistory}
+      >
         <HistoryIcon />
-      </a>
-      <a className={styles.menuLink} href="#" aria-label="Configurações" title="Configurações">
+      </button>
+      <button
+        type="button"
+        className={navBtn(view === 'settings')}
+        aria-label="Configurações"
+        title="Configurações"
+        aria-current={view === 'settings' ? 'page' : undefined}
+        onClick={goSettings}
+      >
         <SettingsIcon />
-      </a>
-      <a
+      </button>
+      <button
+        type="button"
         className={styles.menuLink}
-        href="#"
         aria-label="Mudar tema"
         title="Mudar tema"
         onClick={handleThemeChange}
       >
-{nextThemeIco[theme]}
-
-        </a>
+        {nextThemeIco[theme]}
+      </button>
     </nav>
-  );
+  )
 }
