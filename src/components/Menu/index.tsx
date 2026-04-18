@@ -16,30 +16,17 @@ export function Menu() {
     light: <MoonIcon />,
   }
 
-  function handleThemeChange(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    event.preventDefault(); //não segue o link
-    //console.log('Clicado', Date.now());
+  function handleThemeChange(
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) {
+    event.preventDefault()
+    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'))
+  }
 
-    setTheme(prevTheme => {
-    const nexTheme = prevTheme === 'dark' ? 'light' : 'dark';
-    return nexTheme;
-  });
-
-}
-/*
-useEffect(() =>
-    { console.log('useEffect sem dependência',Date.now());
-     }); //Executado toda vez que o componente renderiza na tela
-
-useEffect(() =>
-    { console.log('useEffect',Date.now()); 
-},[]); //Executa apenas quando o react monta o componente na tela a primeira vez
-*/
-useEffect(() =>
-    { console.log('theme mudou', theme, Date.now()); 
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme',theme );
-    },[theme]);//Executa apenas quando o valor de theme muda.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   return (
     <nav className={styles.menu}>

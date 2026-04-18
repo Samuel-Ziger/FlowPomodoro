@@ -1,10 +1,9 @@
-.cycles{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:1.6rem;
-
+.cycles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
 }
 .cycleDots{
     display:flex;
@@ -22,6 +21,29 @@
 .shortBreakTime{
     background-color: var(--primary);
 }
-.longBreakTime{
-    background-color: var(--info);
+.longBreakTime {
+  background-color: var(--info);
+}
+
+.cycleDotDone {
+  opacity: 0.35;
+}
+
+.cycleDotActive {
+  box-shadow: 0 0 0 0.25rem var(--gray-700);
+  transform: scale(1.12);
+}
+
+.cycleDotPulse {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.25);
+  }
 }
